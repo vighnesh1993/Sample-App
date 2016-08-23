@@ -1,4 +1,3 @@
-"use strict";
 /**
  * @module montage/core/meta/validation-rule
  * @requires montage/core/core
@@ -17,12 +16,6 @@ var logger = require("../logger").logger("blueprint");
  * @extends Montage
  */
 var PropertyValidationRule = exports.PropertyValidationRule = Montage.specialize( /** @lends PropertyValidationRule# */ {
-
-    constructor: {
-        value: function PropertyValidationRule() {
-            this.superForValue("constructor")();
-        }
-    },
 
     /**
      * Initialize a newly allocated blueprint validation rule.
@@ -172,4 +165,3 @@ var PropertyValidationRule = exports.PropertyValidationRule = Montage.specialize
     blueprint: require("../core")._blueprintDescriptor
 
 });
-

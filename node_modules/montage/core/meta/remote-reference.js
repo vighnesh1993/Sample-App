@@ -1,4 +1,3 @@
-"use strict";
 /**
  * @module montage/core/remote-reference
  * @requires montage/core/core
@@ -14,7 +13,6 @@ exports.RemoteReference = Montage.specialize({
 
     constructor: {
         value: function RemoteReference() {
-            this.superForValue("constructor")();
             this._value = null;
             this._reference = null;
             this._promise = null;
@@ -104,4 +102,3 @@ exports.RemoteReference = Montage.specialize({
     blueprint: require("../core")._blueprintDescriptor
 
 });
-

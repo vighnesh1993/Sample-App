@@ -1,100 +1,106 @@
+# Popcorn Readme
 
-This readme file provides a brief overview of the file and folder structure
-included in the default MontageJS project directory.
+![Screenshot](assets/image/screenshot.png)
 
->IMPORTANT: Be sure to replace the contents of this readme file with information
-relevant to your application before deploying the application or passing it on to
-a client.
+[Live Demo](http://montagejs.org/apps/popcorn/)
 
-Project Structure
-============
+Thank your for exploring our Popcorn demo application.
 
-The default project directory includes the following files and folders:
+Popcorn is a movie discovery applicaton optimized for mobile devices. It uses the Rotten Tomatoes RESTful
+web service to expose data on new and upcoming theatrical releases and rentals. Users can scroll through
+a list of movies, filter by categories (such as top box office or upcoming releases), read details on
+selected movies, and watch YouTube trailers inside the application.
 
-* assets/ — Contains global style sheets and images for the application.
-* core/  —  Reserved for the core modules of the application logic.
-* index.html  —  Is the entry-point document for the application.
-* node_modules/  —  Contains the code dependencies required in development.
+## Project Structure
 
-    Includes Montage, the core framework, and Digit, a mobile-optimized user
-    interface widget set by default. Since MontageJS uses the CommonJS module
-    system, you can leverage the npm ecosystem for additional modules. To add
-    dependencies (e.g., foo), use `npm install foo` in the project directory.
+The contents of the Popcorn sample application are structured into the following directories and files:
 
-    NOTE: All packages in this directory must be included as dependencies
-    in package.json.
+* assets/ — Contains global styles and images for the application.
+* core/ — Contains modules with the data and business logic of the application.
+* node_modules/ — Contains the dependencies that power the application in development.
+* ui/ — Contains the user interface components of the demo application.
+* index.html — Is the entry-point HTML document for the application.
+* LICENSE.md — Contains copyright information.
+* package.json — Describes your app and its dependencies.
+* README.md — Provides information about the demo application and how to install it.
 
-* package.json  —  Describes the application and the dependencies included in
-            the node_modules directory.
-* README.md  —  The default readme file.
-* run-tests.html  —  Is a page to run Jasmine tests manually in the browser.
-* test/  —  Contains tests for the application.
+## The User Interface
 
-    By default, this directory includes all.js, a module that points the test runner
-    to all jasmine specs. To use this module run `npm install` to get the dependencies
-    required to run unit tests.
+The Popcorn user interface consists of multiple components. These components are stored in the ui directory
+and identified with a .reel extension. Conceptually, the application breaks down into a container that holds
+a navigation area and a content area.
 
-* ui/  —  Contains the application user interface components.
+* The container is presented by the Main component (main.reel), which accesses the Rotten Tomatoes web service
+    and uses the other components in the ui directory for the presentation.
+* The navigation is presented by the Categories component (categories.reel) and its Button child component 
+    (category-button.reel).
+* The content area is represented by the Moviestrip component (moviestrip.reel) — including its Image (image.reel)
+    and Overlay (overlay.reel) child components — the Details component (details.reel), and the Player component
+    (palyer.reel), which loads the YouTube player when users click the Trailer button in a movie's details view.
 
-    By default, this directory contains one component: main.reel (the Main
-    user interface component).
+Note that MontageJS applications are modular, that is, they are assembled out of encapsulated, resuable
+components; regardless of where a component is used, the same HTML, CSS, and JavaScript will control how
+that particular component is structured, looks, and behaves. When you expand a component's .reel directory,
+you will find inside:
 
-In development, you can expand this project directory as necessary; for example,
-depending on the project you may want to add the following folders:
+* An HTML file (AKA template in MontageJS speak), which controls the component's structure.
+* A JavaScript file, which controls the business logic.
+* A CSS file, which controls the component's appearance.
+* (Optional) Image files that are unique to the component and are stored with the component for easy reusability.
 
-* locale/  —  For localized content.
-* scripts/  —  For JS libraries that do not support the CommonJS exports object
-           and, therefore, have to be loaded using a `<script>` tag.
+Note also that MontageJS uses a declarative programming paradigm and a clean separation of concerns:
+The declaration is included inside a template's script element, and the HTML is free of any templating language
+and business logic, which is a boon to team work between designers and developers.
 
-Unit Testing
-============
+## The Data
 
-MontageJS uses some pure unit tests that are straightforward [Jasmine specs][1].
+Popcorn uses the Rotten Tomatoes and YouTube RESTful services to expose data on theatrical and rental movie
+releases, and to play trailers within the application. The modules that handle the flow of data within the
+application are stored in the Core directory. Reactive bindings are used in the respective templates to thread
+data from one component to another.
 
-To install the test code, run `npm install` in your project folder. This installs the
-the [montage-testing][2] package, which adds some useful utilities for writing
-jasmine tests. You will need the file run-tests.html.
+## Preview and Explore
 
-For an example of how we implement unit testing, see the [digit][3] repository:
+You can preview this application from within [Montage Studio](https://work.montagestudio.com), as a hosted repo,
+or locally.
 
-* [run-tests][4] loads our test environment.
-* `data-module="test/all"` inside the final script tag tells the system to load [test/all.js][5].
-* all.js specifies a list of module ids for the runner to execute.
+### Hosted, with Montage Studio
+To preview the application in Montage Studio, click the Run button at the top of the project explorer.
 
->Note that in this example, all the tests load a page in an iframe using
-`TestPageLoader.queueTest()`. These are akin to integration tests since they test
-the component in a real environment.
+### Locally, without Montage Studio
 
-We also test some components by [mocking their dependencies][6].
+To run the demo locally, you need:
 
-Documentation
-============
+* A web server of your choice. MontageJS applications are client-side applications with no particular back-end dependency.
+* Cloned GitHub repo of this demo.
 
-Here are some links you may find helpful:
+To run the Popcorn demo locally, follow these steps:
 
-* [API Reference][7]
-* [Documentation][8]
-* [FAQ][9]
+1. Clone the popcorn [GitHub repo](https://github.com/montagejs/popcorn) in your desktop.
 
-Contact
-======
+2. Spin up your preferred HTTP server and point your browser to the associated port to serve the popcorn directory.
 
-* Got questions? Join us on [irc.freenode.net#montage][10].
-* Got feedback or want to report a bug? Let us know by creating a new [Github issue][11].
-* Want to contribute? [Pull-requests][12] are more than welcome.
+    >**Note:** During development MontageJS applications rely on XHR to load their various components and modules,
+    which is why you will need a web server to serve the demo.
 
-[1]: https://github.com/montagejs/montage/blob/master/test/core/super-spec.js        "Jasmine specs"
-[2]: https://github.com/montagejs/montage-testing        "montage-testing"
-[3]: https://github.com/montagejs/digit        "digit"
-[4]: https://github.com/montagejs/digit/blob/master/run-tests.html        "run-tests"
-[5]: https://github.com/montagejs/digit/tree/master/test        "test/all.js"
-[6]: https://github.com/montagejs/montage/blob/master/test/base/abstract-button-spec.js        "mocking their dependencies"
-[7]: http://montagejs.org/api/        "API Reference"
-[8]: http://montagejs.org/docs/        "Documentation"
-[9]: http://montagejs.org/docs/faq.html        "FAQ"
-[10]: http://webchat.freenode.net/?channels=montage        "irc.freenode.net#montage"
-[11]: https://github.com/montagejs/montage/issues        "Github issue"
-[12]: https://github.com/montagejs/montage/pulls        "Pull-requests"
+    > If you happen to have [minit](https://github.com/montagejs/minit), the Montage Initializer, installed 
+    (`npm install minit -g`) you can run `minit serve` from within the demo directory to set up a server on demand.
 
-Last edited: May 9, 2014
+# Next Steps
 
+To learn more about Montage Studio and the MontageJS framework, see the following resources:
+
+* [Montage Studio overview](http://docs.montagestudio.com/montage-studio/ide-at-a-glance.html)
+* [MontageJS framework](http://docs.montagestudio.com/montagejs/index.html)
+
+## Contact Us
+
+Got questions? Join us on [irc.freenode.net#montage](http://webchat.freenode.net/?channels=montage) or follow us on [Twitter](https://twitter.com/montagejs).
+
+Got feedback or want to report a bug? Let us know by creating a new [GitHub issue](https://github.com/montagejs/popcorn).
+
+## Credit
+
+This demo application was created by the [MontageJS team](http://montagejs.org).
+
+Last updated: May 9, 2014

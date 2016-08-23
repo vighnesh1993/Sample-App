@@ -1,4 +1,3 @@
-"use strict";
 
 /**
  * @module montage/core/meta/blueprint-reference
@@ -48,7 +47,7 @@ exports.BlueprintReference = RemoteReference.specialize( {
             var binderReference = references.binderReference;
             var binderPromise = Promise.resolve(BinderModule.Binder.manager.defaultBinder);
             if (binderReference) {
-                binderPromise = BinderReference.valueFromReference(binderReference, require);
+                binderPromise = BinderReference.prototype.valueFromReference(binderReference, require);
             }
 
             return binderPromise.then(function (binder) {
@@ -76,11 +75,10 @@ exports.BlueprintReference = RemoteReference.specialize( {
             references.blueprintName = value.name;
             references.blueprintModule = value.blueprintInstanceModule;
             if ((value.binder) && (! value.binder.isDefault)) {
-                references.binderReference = BinderReference.referenceFromValue(value.binder);
+                references.binderReference = BinderReference.prototype.referenceFromValue(value.binder);
             }
             return references;
         }
     }
 
 });
-

@@ -23,8 +23,8 @@ var AbstractCheckbox = exports.AbstractCheckbox = AbstractControl.specialize( /*
             if(this.constructor === AbstractCheckbox) {
                 throw new Error("AbstractCheckbox cannot be instantiated.");
             }
-            AbstractControl.didCreate.call(this); // super
-            this._pressComposer = PressComposer.create();
+
+            this._pressComposer = new PressComposer();
             this.addComposer(this._pressComposer);
 
             this.defineBindings({
